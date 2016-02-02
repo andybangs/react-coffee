@@ -14,15 +14,19 @@ class App extends Component {
         <div className="row">
 
           <Panel
-            title="Coffee"
-            value={recipe.coffee}
-            operation={actions.modCoffee}
+            title={recipe.coffee.title}
+            value={recipe.coffee.value}
+            displayInOz={recipe.coffee.displayInOz}
+            editing={recipe.coffee.editing}
+            op={actions.modCoffee}
           />
 
           <Panel
-            title="Water"
-            value={recipe.water}
-            operation={actions.modWater}
+            title={recipe.water.title}
+            value={recipe.water.value}
+            displayInOz={recipe.water.displayInOz}
+            editing={recipe.water.editing}
+            op={actions.modWater}
           />
 
         </div>
@@ -30,9 +34,11 @@ class App extends Component {
         <div className="row">
 
           <Panel
-            title="Ratio"
-            value={recipe.ratio}
-            operation={actions.modRatio}
+            title={recipe.ratio.title}
+            value={recipe.ratio.value}
+            displayInOz={recipe.ratio.displayInOz}
+            editing={recipe.ratio.editing}
+            op={actions.modRatio}
           />
 
           <Timer />
