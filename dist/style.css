@@ -1,0 +1,120 @@
+html, body, div {
+  height: 100%;
+  text-align: center;
+}
+
+body {
+  color: #4f4f4f;
+  font: 18px 'Roboto Mono', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.4em;
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 2.8em;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  border-bottom: solid 2px;
+}
+
+a {
+  cursor: pointer;
+}
+
+.button-cont {
+  padding: 0 15px;
+}
+
+a.button {
+  font-weight: bold;
+  width: 50%;
+  color: #eaeaea;
+  padding: 5px 0;
+  background: #6d6d6d;
+}
+
+a.button.button-left {
+  background-color: #545454;
+}
+
+a.unit {
+  font-size: 1.2em;
+}
+
+input {
+  font-size: 2em;
+  font-weight: 700;
+  text-align: center;
+  width: 65%;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.Coffee {
+  background: #F79E8D;
+}
+.Coffee a.button {
+  color: #F79E8D;
+  font-size: 1.2em
+}
+
+.Water {
+  background: #A7E0F3;
+}
+
+.Water a.button {
+  color: #A7E0F3;
+  font-size: 1.2em
+}
+
+.Ratio {
+  background: #EAEAEA;
+}
+
+.Ratio a.button {
+  font-size: 1.2em;
+}
+
+#container {
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+}
+
+.row {
+  height: 50%;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+}
+
+.flex-1 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-2 {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
