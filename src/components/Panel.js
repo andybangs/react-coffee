@@ -6,7 +6,8 @@ import { TOGGLE_UNIT, TOGGLE_EDIT, UPDATE, INC, DEC } from '../constants/operati
 import { gToOz, toDecimal } from '../util/math'
 
 const Panel = (props) => {
-  const { title, value, displayInOz, editing, op } = props
+  const { component, op } = props
+  const { title, value, displayInOz, editing } = component
 
   const displayValue = displayInOz ? toDecimal(gToOz(value)) : value
   const unitText = displayInOz ? 'ounces' : 'grams'
@@ -88,10 +89,12 @@ const Panel = (props) => {
 }
 
 Panel.propTypes = {
-  title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  displayInOz: PropTypes.bool.isRequired,
-  editing: PropTypes.bool.isRequired,
+  component: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+    displayInOz: PropTypes.bool.isRequired,
+    editing: PropTypes.bool.isRequired,
+  }).isRequired,
   op: PropTypes.func.isRequired,
 }
 
