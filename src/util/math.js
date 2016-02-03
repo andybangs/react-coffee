@@ -1,72 +1,89 @@
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+// isInt : Number -> Bool
+function isInt(num) {
+  const str = num.toString();
+  return str.indexOf('.') === -1;
+}
+
+// isAcceptableFloat : Number -> Bool
+function isAcceptableFloat(num) {
+  const str = num.toString();
+  return str.indexOf('.') === str.length - 2;
+}
+
+
+//------------------------------------------------------------------------------
+// Public Interface
+//------------------------------------------------------------------------------
+
 // gToOz : Number -> Number
 export function gToOz(val) {
-  const valStr = val.toString()
-  let newVal
+  const errMsg = 'Error: gToOz only accepts values with 0 or 1 decimal places';
+  let newVal;
 
-  if (valStr.indexOf('.') === -1) {
-    newVal = val * 35274 / 1000000
-  } else if (valStr.indexOf('.') === valStr.length - 2) {
-    newVal = (val * 10 * 35274 / 1000000) / 10
+  if (isInt(val)) {
+    newVal = val * 35274 / 1000000;
+  } else if (isAcceptableFloat(val)) {
+    newVal = (val * 10 * 35274 / 1000000) / 10;
   } else {
-    console.error('Error: function gToOz only accepts ints or floats with one digit after the decimal')
+    console.error(errMsg);
   }
 
-  return newVal
+  return newVal;
 }
 
 // ozToG : Number -> Number
 export function ozToG(val) {
-  const valStr = val.toString()
-  let newVal
+  const errMsg = 'Error: ozToG only accepts values with 0 or 1 decimal places';
+  let newVal;
 
-  if (valStr.indexOf('.') === -1) {
-    newVal = val * 283495 / 10000
-  } else if (valStr.indexOf('.') === valStr.length - 2) {
-    newVal = (val * 10 * 283495 / 10000) / 10
+  if (isInt(val)) {
+    newVal = val * 283495 / 10000;
+  } else if (isAcceptableFloat(val)) {
+    newVal = (val * 10 * 283495 / 10000) / 10;
   } else {
-    console.error('Error: function ozToG only accepts ints or floats with one digit after the decimal')
+    console.error(errMsg);
   }
 
-  return newVal
+  return newVal;
 }
 
 // incVal : Number -> Number -> Number
 export function incVal(val, step) {
-  const valStr = val.toString()
-  const stepStr = step.toString()
+  const errMsg = 'Error: incVal only accepts values with 0 or 1 decimal places';
+  let newVal;
 
-  let newVal
-
-  if (valStr.indexOf('.') === -1 && stepStr.indexOf('.') === -1) {
-    newVal = val + step
-  } else if (valStr.indexOf('.') === valStr.length - 2 || stepStr.indexOf('.') === stepStr.length - 2) {
-    newVal = (val * 10 + step * 10) / 10
+  if (isInt(val) && isInt(step)) {
+    newVal = val + step;
+  } else if (isAcceptableFloat(val) || isAcceptableFloat(step)) {
+    newVal = (val * 10 + step * 10) / 10;
   } else {
-    console.error('Error: function incVal only accepts ints or floats with one digit after the decimal')
+    console.error(errMsg);
   }
 
-  return newVal
+  return newVal;
 }
 
 // decVal : Number -> Number -> Number
 export function decVal(val, step) {
-  const valStr = val.toString()
-  const stepStr = step.toString()
+  const errMsg = 'Error: decVal only accepts values with 0 or 1 decimal places';
+  let newVal;
 
-  let newVal
-
-  if (valStr.indexOf('.') === -1 && stepStr.indexOf('.') === -1) {
-    newVal = val - step
-  } else if (valStr.indexOf('.') === valStr.length - 2 || stepStr.indexOf('.') === stepStr.length - 2) {
-    newVal = (val * 10 - step * 10) / 10
+  if (isInt(val) && isInt(step)) {
+    newVal = val - step;
+  } else if (isAcceptableFloat(val) || isAcceptableFloat(step)) {
+    newVal = (val * 10 - step * 10) / 10;
   } else {
-    console.error('Error: function decVal only accepts ints or floats with one digit after the decimal')
+    console.error(errMsg);
   }
 
-  return newVal
+  return newVal;
 }
 
 // toDecimal : Number -> Number
 export function toDecimal(val) {
-  return +(val).toFixed(1)
+  return +(val).toFixed(1);
 }

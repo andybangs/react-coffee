@@ -1,12 +1,12 @@
-import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as RecipeActions from '../actions/recipe'
-import Panel from '../components/Panel'
-import Timer from '../components/Timer'
+import React, { PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as RecipeActions from '../actions/recipe';
+import Panel from '../components/Panel';
+import Timer from '../components/Timer';
 
 const App = (props) => {
-  const { recipe, actions } = props
+  const { recipe, actions } = props;
 
   return (
     <div id="container">
@@ -19,19 +19,28 @@ const App = (props) => {
         <Timer />
       </div>
     </div>
-  )
-}
+  );
+};
+
+App.propTypes = {
+  recipe: PropTypes.shape({
+    coffee: PropTypes.object.isRequired,
+    water: PropTypes.object.isRequired,
+    ratio: PropTypes.object.isRequired,
+  }).isRequired,
+  actions: PropTypes.object.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
-    recipe: state.recipe
-  }
+    recipe: state.recipe,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(RecipeActions, dispatch)
-  }
+    actions: bindActionCreators(RecipeActions, dispatch),
+  };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);

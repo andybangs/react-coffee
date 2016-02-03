@@ -1,61 +1,81 @@
-import React, { PropTypes } from 'react'
-import cL from 'classnames'
+import React, { PropTypes } from 'react';
+import cL from 'classnames';
 
-import { COFFEE, WATER, RATIO } from '../constants/ingredients'
-import { TOGGLE_UNIT, TOGGLE_EDIT, UPDATE, INC, DEC } from '../constants/operations'
-import { gToOz, toDecimal } from '../util/math'
+import { RATIO } from '../constants/ingredients';
+import { TOGGLE_UNIT, TOGGLE_EDIT, UPDATE, INC, DEC } from '../constants/operations';
+import { gToOz, toDecimal } from '../util/math';
 
 const Panel = (props) => {
-  const { component, op } = props
-  const { title, value, displayInOz, editing } = component
+  const { component, op } = props;
+  const { title, value, displayInOz, editing } = component;
 
-  const displayValue = displayInOz ? toDecimal(gToOz(value)) : value
-  const unitText = displayInOz ? 'ounces' : 'grams'
+  const displayValue = displayInOz ? toDecimal(gToOz(value)) : value;
+  const unitText = displayInOz ? 'ounces' : 'grams';
 
   function handleUpdate(ev) {
-    const inputVal = parseInt(ev.target.value, 10)
-    if (isNaN(inputVal)) return
-    op(UPDATE, inputVal)
+    const inputVal = parseInt(ev.target.value, 10);
+    if (isNaN(inputVal)) return;
+    op(UPDATE, inputVal);
   }
 
   function handleSubmit(ev) {
-    if (ev.which === 13) op(TOGGLE_EDIT)
+    if (ev.which === 13) op(TOGGLE_EDIT);
   }
 
-  const valInput =
+  function toggleEdit() {
+    op(TOGGLE_EDIT);
+  }
+
+  function toggleUnit() {
+    op(TOGGLE_UNIT);
+  }
+
+  function inc() {
+    op(INC);
+  }
+
+  function dec() {
+    op(DEC);
+  }
+
+  const valInput = (
     <input type="number"
       pattern="[0-9]*"
       inputMode="numeric"
       value={displayValue}
       onChange={handleUpdate}
       onKeyDown={handleSubmit}
-      onBlur={() => op(TOGGLE_EDIT)}
-      autoFocus>
+      onBlur={toggleEdit}
+      autoFocus
+    >
     </input>
+  );
 
-  const ingredientDisplay =
-    <h1 onClick={() => op(TOGGLE_EDIT)}>
+  const ingredientDisplay = (
+    <h1 onClick={toggleEdit}>
       {displayValue}
     </h1>
+  );
 
-  const ratioDisplay =
-    <h1 onClick={() => op(TOGGLE_EDIT)}>
+  const ratioDisplay = (
+    <h1 onClick={toggleEdit}>
       {`1:${displayValue}`}
     </h1>
+  );
 
-  const componentMain = editing ?
-    valInput :
-    title !== RATIO ? ingredientDisplay : ratioDisplay
+  const componentDisplay = title !== RATIO ? ingredientDisplay : ratioDisplay;
+  const componentMain = editing ? valInput : componentDisplay;
 
   const componentUnit = title !== RATIO ?
     <a className="unit"
-      onClick={() => op(TOGGLE_UNIT)}>
+      onClick={toggleUnit}
+    >
       {unitText}
     </a> :
-    null
+    null;
 
   return (
-    <div className={ cL( "column", title) }>
+    <div className={cL('column', title)}>
 
       <div className="flex-2">
         <h2>{title}</h2>
@@ -71,13 +91,15 @@ const Panel = (props) => {
 
       <div className="flex-1"></div>
 
-      <div className={ cL("flex-1", "button-cont") }>
-        <a className={ cL("button", "button-left") }
-          onClick={() => op(DEC)}>
+      <div className={cL('flex-1', 'button-cont')}>
+        <a className={cL('button', 'button-left')}
+          onClick={dec}
+        >
           –
         </a>
-        <a className={ cL("button", "button-right") }
-          onClick={() => op(INC)}>
+        <a className={ cL('button', 'button-right') }
+          onClick={inc}
+        >
           +
         </a>
       </div>
@@ -85,8 +107,8 @@ const Panel = (props) => {
       <div className="flex-1"></div>
 
     </div>
-  )
-}
+  );
+};
 
 Panel.propTypes = {
   component: PropTypes.shape({
@@ -96,6 +118,6 @@ Panel.propTypes = {
     editing: PropTypes.bool.isRequired,
   }).isRequired,
   op: PropTypes.func.isRequired,
-}
+};
 
-export default Panel
+export default Panel;
