@@ -2,7 +2,7 @@ react-coffee
 ===========
 A coffee brewing app built with React + Redux.
 
-Check out this same app built with Elm here: <a href="https://github.com/andybangs/react-coffee">elm-coffee</a>.
+Check out this same app built with Elm here: <a href="https://github.com/andybangs/elm-coffee">elm-coffee</a>.
 
 ####Instructions
   
