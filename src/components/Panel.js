@@ -13,8 +13,8 @@ const Panel = (props) => {
   const unitText = displayInOz ? 'ounces' : 'grams';
 
   function handleUpdate(ev) {
-    const inputVal = parseInt(ev.target.value, 10);
-    if (isNaN(inputVal)) return;
+    let inputVal = parseInt(ev.target.value, 10);
+    if (isNaN(inputVal)) inputVal = 0;
     op(UPDATE, inputVal);
   }
 
