@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import cL from 'classnames';
 
+const STOPPED = 'STOPPED';
+const RUNNING = 'RUNNING';
+
+
 class Timer extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +15,7 @@ class Timer extends Component {
     this.noSecondsElapsed = this.noSecondsElapsed.bind(this);
     this.incrementerAtLastCleared = this.incrementerAtLastCleared.bind(this);
 
-    this.state = { secondsElapsed: 0, lastClearedIncrementer: null };
+    this.state = { secondsElapsed: 0, lastClearedIncrementer: null, timerState: STOPPED };
   }
 
   getSeconds() {
@@ -23,12 +27,14 @@ class Timer extends Component {
   }
 
   handleStartClick() {
+    this.setState({ timerState: RUNNING });
     this.incrementer = setInterval(() => {
       this.setState({ secondsElapsed: this.state.secondsElapsed + 1 });
     }, 1000);
   }
 
   handleStopClick() {
+    this.setState({ timerState: STOPPED });
     clearInterval(this.incrementer);
     this.setState({ lastClearedIncrementer: this.incrementer });
   }
@@ -46,8 +52,12 @@ class Timer extends Component {
   }
 
   render() {
+    const bgColor = this.state.timerState === RUNNING && this.noSecondsElapsed() ?
+      'timer-start' :
+      '';
+
     return (
-      <div className={ cL('column', 'timer') }>
+      <div className={ cL('column', bgColor) }>
         <div className="flex-2">
           <h2>Timer</h2>
         </div>
