@@ -1,2 +1,4 @@
 node_modules/
-dist/bundle.js
+npm-debug.log
+dist/vendors.bundle.js
+dist/app.bundle.js
