@@ -2,13 +2,13 @@
 // Helpers
 //------------------------------------------------------------------------------
 
-// isInt : Number -> Bool
+// isInt :: Number -> Bool
 function isInt(num) {
   const str = num.toString();
   return str.indexOf('.') === -1;
 }
 
-// isAcceptableFloat : Number -> Bool
+// isAcceptableFloat :: Number -> Bool
 function isAcceptableFloat(num) {
   const str = num.toString();
   return str.indexOf('.') === str.length - 2;
@@ -19,7 +19,7 @@ function isAcceptableFloat(num) {
 // Public Interface
 //------------------------------------------------------------------------------
 
-// gToOz : Number -> Number
+// gToOz :: Number -> Number
 export function gToOz(val) {
   const errMsg = 'Error: gToOz only accepts values with 0 or 1 decimal places';
   let newVal;
@@ -35,7 +35,7 @@ export function gToOz(val) {
   return newVal;
 }
 
-// ozToG : Number -> Number
+// ozToG :: Number -> Number
 export function ozToG(val) {
   const errMsg = 'Error: ozToG only accepts values with 0 or 1 decimal places';
   let newVal;
@@ -51,7 +51,7 @@ export function ozToG(val) {
   return newVal;
 }
 
-// incVal : Number -> Number -> Number
+// incVal :: Number -> Number -> Number
 export function incVal(val, step) {
   const errMsg = 'Error: incVal only accepts values with 0 or 1 decimal places';
   let newVal;
@@ -67,7 +67,7 @@ export function incVal(val, step) {
   return newVal;
 }
 
-// decVal : Number -> Number -> Number
+// decVal :: Number -> Number -> Number
 export function decVal(val, step) {
   const errMsg = 'Error: decVal only accepts values with 0 or 1 decimal places';
   let newVal;
@@ -83,7 +83,7 @@ export function decVal(val, step) {
   return newVal;
 }
 
-// toDecimal : Number -> Number
+// toDecimal :: Number -> Number
 export function toDecimal(val) {
   return +(val).toFixed(1);
 }

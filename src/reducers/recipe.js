@@ -3,9 +3,28 @@ import { MOD_COFFEE, MOD_WATER, MOD_RATIO } from '../constants/recipe';
 import { TOGGLE_UNIT, TOGGLE_EDIT, UPDATE, INC, DEC } from '../constants/operations';
 import { ozToG, incVal, decVal, toDecimal } from '../util/math';
 
-function component(ingredient, value, maxValue) {
+/* TYPES -----------------------------------------------------------------------
+type alias Component = {
+  title :: String,
+  value :: Number,
+  maxValue :: Number,
+  displayInOx :: Bool,
+  editing :: Bool,
+}
+
+type alias RecipeState = {
+  coffee :: Component,
+  water :: Component,
+  ratio :: Component,
+}
+
+type alias Action = String
+----------------------------------------------------------------------------- */
+
+// component :: String -> Number -> Number -> Component
+function component(title, value, maxValue) {
   return {
-    title: ingredient,
+    title,
     value,
     maxValue,
     displayInOz: false,
@@ -13,12 +32,14 @@ function component(ingredient, value, maxValue) {
   };
 }
 
+// initialState :: RecipeState
 const initialState = {
   coffee: component(COFFEE, 20, 100),
   water: component(WATER, 320, 1900),
   ratio: component(RATIO, 16, 19),
 };
 
+// recipe :: RecipeState -> Action -> RecipeState
 export default function recipe(state = initialState, action) {
   const { coffee, water, ratio } = state;
   const { type, operation, inputVal } = action;
