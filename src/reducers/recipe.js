@@ -34,9 +34,9 @@ function component(title, value, maxValue) {
 
 // initialState :: RecipeState
 const initialState = {
-  coffee: component(COFFEE, 20, 100),
-  water: component(WATER, 320, 1900),
-  ratio: component(RATIO, 16, 19),
+  coffee: component(COFFEE, 20, 500),
+  water: component(WATER, 320, 9750),
+  ratio: component(RATIO, 16, 19.5),
 };
 
 // recipe :: RecipeState -> Action -> RecipeState
