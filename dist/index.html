@@ -17,6 +17,11 @@
   <div id="app"></div>
   <script src="vendors.bundle.js"></script>
   <script src="app.bundle.js"></script>
+  <script>
+    document.ontouchmove = function(event){
+      event.preventDefault();
+    }
+  </script>
 </body>
 
 </html>
