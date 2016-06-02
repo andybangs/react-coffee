@@ -39,7 +39,8 @@ const Panel = (props) => {
   }
 
   const valInput = (
-    <input type="number"
+    <input
+      type="number"
       pattern="[0-9]*"
       inputMode="numeric"
       value={displayValue}
@@ -51,28 +52,12 @@ const Panel = (props) => {
     </input>
   );
 
-  const ingredientDisplay = (
-    <h1 onClick={toggleEdit}>
-      {displayValue}
-    </h1>
-  );
-
-  const ratioDisplay = (
-    <h1 onClick={toggleEdit}>
-      {`1:${displayValue}`}
-    </h1>
-  );
-
+  const ingredientDisplay = <h1 onClick={toggleEdit}>{displayValue}</h1>;
+  const ratioDisplay = <h1 onClick={toggleEdit}>{`1:${displayValue}`}</h1>;
   const componentDisplay = title !== RATIO ? ingredientDisplay : ratioDisplay;
   const componentMain = editing ? valInput : componentDisplay;
-
   const componentUnit = title !== RATIO ?
-    <a className="unit"
-      onClick={toggleUnit}
-    >
-      {unitText}
-    </a> :
-    null;
+    <a className="unit" onClick={toggleUnit}>{unitText}</a> : null;
 
   return (
     <div className={cL('column', title)}>
@@ -92,20 +77,11 @@ const Panel = (props) => {
       <div className="flex-1"></div>
 
       <div className={cL('flex-1', 'button-cont')}>
-        <a className={cL('button', 'button-left')}
-          onClick={dec}
-        >
-          –
-        </a>
-        <a className={ cL('button', 'button-right') }
-          onClick={inc}
-        >
-          +
-        </a>
+        <a className={cL('button', 'button-left')} onClick={dec}>–</a>
+        <a className={cL('button', 'button-right')} onClick={inc}>+</a>
       </div>
 
       <div className="flex-1"></div>
-
     </div>
   );
 };

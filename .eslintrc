@@ -3,7 +3,5 @@
   "ecmaFeatures": {
     "experimentalObjectRestSpread": 2
   },
-  "rules": {
-    "no-console": 0
-  }
+  "parser": "babel-eslint"
 }

@@ -4,18 +4,21 @@ import cL from 'classnames';
 const STOPPED = 'STOPPED';
 const RUNNING = 'RUNNING';
 
-
 class Timer extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      secondsElapsed: 0,
+      lastClearedIncrementer: null,
+      timerState: STOPPED,
+    };
 
     this.handleStartClick = this.handleStartClick.bind(this);
     this.handleStopClick = this.handleStopClick.bind(this);
     this.handleResetClick = this.handleResetClick.bind(this);
     this.noSecondsElapsed = this.noSecondsElapsed.bind(this);
     this.incrementerAtLastCleared = this.incrementerAtLastCleared.bind(this);
-
-    this.state = { secondsElapsed: 0, lastClearedIncrementer: null, timerState: STOPPED };
   }
 
   getSeconds() {
@@ -57,7 +60,7 @@ class Timer extends Component {
       '';
 
     return (
-      <div className={ cL('column', bgColor) }>
+      <div className={cL('column', bgColor)}>
         <div className="flex-2">
           <h2>Timer</h2>
         </div>
@@ -68,17 +71,20 @@ class Timer extends Component {
 
         <div className="flex-2"></div>
 
-        <div className={ cL('flex-1', 'button-cont') }>
+        <div className={cL('flex-1', 'button-cont')}>
           {(this.noSecondsElapsed() || this.incrementerAtLastCleared()) ?
-            <a className={ cL('button', 'button-left') }
+            <a
+              className={cL('button', 'button-left')}
               onClick={this.handleStartClick}
             >start</a> :
-            <a className={ cL('button', 'button-left') }
+            <a
+              className={cL('button', 'button-left')}
               onClick={this.handleStopClick}
             >stop</a>
           }
           {(!this.noSecondsElapsed() && this.incrementerAtLastCleared()) ?
-            <a className={ cL('button', 'button-right') }
+            <a
+              className={cL('button', 'button-right')}
               onClick={this.handleResetClick}
             >reset</a> :
             null
@@ -86,7 +92,6 @@ class Timer extends Component {
         </div>
 
         <div className="flex-1"></div>
-
       </div>
     );
   }

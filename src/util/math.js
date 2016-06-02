@@ -29,7 +29,7 @@ export function gToOz(val) {
   } else if (isAcceptableFloat(val)) {
     newVal = (val * 10 * 35274 / 1000000) / 10;
   } else {
-    console.error(errMsg);
+    throw new Error(errMsg);
   }
 
   return newVal;
@@ -45,7 +45,7 @@ export function ozToG(val) {
   } else if (isAcceptableFloat(val)) {
     newVal = (val * 10 * 283495 / 10000) / 10;
   } else {
-    console.error(errMsg);
+    throw new Error(errMsg);
   }
 
   return newVal;
@@ -61,7 +61,7 @@ export function incVal(val, step) {
   } else if (isAcceptableFloat(val) || isAcceptableFloat(step)) {
     newVal = (val * 10 + step * 10) / 10;
   } else {
-    console.error(errMsg);
+    throw new Error(errMsg);
   }
 
   return newVal;
@@ -77,7 +77,7 @@ export function decVal(val, step) {
   } else if (isAcceptableFloat(val) || isAcceptableFloat(step)) {
     newVal = (val * 10 - step * 10) / 10;
   } else {
-    console.error(errMsg);
+    throw new Error(errMsg);
   }
 
   return newVal;
