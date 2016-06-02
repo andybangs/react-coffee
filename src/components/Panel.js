@@ -23,7 +23,8 @@ const Panel = (props) => {
   }
 
   function handleFocus(e) {
-    e.target.select();
+    const target = e.target;
+    setTimeout(() => target.select(), 0);
   }
 
   const toggleEdit = () => op(TOGGLE_EDIT);
