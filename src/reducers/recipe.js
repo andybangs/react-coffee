@@ -22,15 +22,13 @@ type alias Action = String
 ----------------------------------------------------------------------------- */
 
 // component :: String -> Number -> Number -> Component
-function component(title, value, maxValue) {
-  return {
-    title,
-    value,
-    maxValue,
-    displayInOz: false,
-    editing: false,
-  };
-}
+const component = (title, value, maxValue) => ({
+  title,
+  value,
+  maxValue,
+  displayInOz: false,
+  editing: false,
+});
 
 // initialState :: RecipeState
 const initialState = {

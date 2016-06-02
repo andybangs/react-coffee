@@ -31,16 +31,12 @@ App.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    recipe: state.recipe,
-  };
-}
+const mapStateToProps = (state) => ({
+  recipe: state.recipe,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(RecipeActions, dispatch),
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(RecipeActions, dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
