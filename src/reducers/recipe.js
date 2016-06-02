@@ -8,7 +8,7 @@ type alias Component = {
   title :: String,
   value :: Number,
   maxValue :: Number,
-  displayInOx :: Bool,
+  displayInOz :: Bool,
   editing :: Bool,
 }
 
@@ -21,8 +21,8 @@ type alias RecipeState = {
 type alias Action = String
 ----------------------------------------------------------------------------- */
 
-// component :: String -> Number -> Number -> Component
-const component = (title, value, maxValue) => ({
+// createComponent :: String -> Number -> Number -> Component
+const createComponent = (title, value, maxValue) => ({
   title,
   value,
   maxValue,
@@ -30,11 +30,23 @@ const component = (title, value, maxValue) => ({
   editing: false,
 });
 
+// toggleUnit :: Component -> Component
+const toggleUnit = (component) => ({
+  ...component,
+  displayInOz: !component.displayInOz,
+});
+
+// toggleEdit :: Component -> Component
+const toggleEdit = (component) => ({
+  ...component,
+  editing: !component.editing,
+});
+
 // initialState :: RecipeState
 const initialState = {
-  coffee: component(COFFEE, 20, 500),
-  water: component(WATER, 320, 9750),
-  ratio: component(RATIO, 16, 19.5),
+  coffee: createComponent(COFFEE, 20, 500),
+  water: createComponent(WATER, 320, 9750),
+  ratio: createComponent(RATIO, 16, 19.5),
 };
 
 // recipe :: RecipeState -> Action -> RecipeState
@@ -48,15 +60,14 @@ export default function recipe(state = initialState, action) {
   switch (type) {
     case MOD_COFFEE:
       if (operation === TOGGLE_UNIT) {
-        return {
-          ...state,
-          coffee: { ...coffee, displayInOz: !coffee.displayInOz },
-        };
-      } else if (operation === TOGGLE_EDIT) {
-        return { ...state,
-          coffee: { ...coffee, editing: !coffee.editing },
-        };
-      } else if (operation === UPDATE) {
+        return { ...state, coffee: toggleUnit(coffee) };
+      }
+
+      if (operation === TOGGLE_EDIT) {
+        return { ...state, coffee: toggleEdit(coffee) };
+      }
+
+      if (operation === UPDATE) {
         newCoffeeVal = coffee.displayInOz ?
           toDecimal(ozToG(inputVal)) :
           inputVal;
@@ -83,14 +94,14 @@ export default function recipe(state = initialState, action) {
 
     case MOD_WATER:
       if (operation === TOGGLE_UNIT) {
-        return { ...state,
-          water: { ...water, displayInOz: !water.displayInOz },
-        };
-      } else if (operation === TOGGLE_EDIT) {
-        return { ...state,
-          water: { ...water, editing: !water.editing },
-        };
-      } else if (operation === UPDATE) {
+        return { ...state, water: toggleUnit(water) };
+      }
+
+      if (operation === TOGGLE_EDIT) {
+        return { ...state, water: toggleEdit(water) };
+      }
+
+      if (operation === UPDATE) {
         newWaterVal = water.displayInOz ?
           Math.round(ozToG(inputVal)) :
           inputVal;
@@ -119,10 +130,10 @@ export default function recipe(state = initialState, action) {
 
     case MOD_RATIO:
       if (operation === TOGGLE_EDIT) {
-        return { ...state,
-          ratio: { ...ratio, editing: !ratio.editing },
-        };
-      } else if (operation === UPDATE) {
+        return { ...state, ratio: toggleEdit(ratio) };
+      }
+
+      if (operation === UPDATE) {
         newRatioVal = inputVal;
       } else if (operation === INC) {
         newRatioVal = toDecimal(incVal(ratio.value, 0.5));
