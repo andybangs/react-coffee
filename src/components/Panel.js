@@ -12,31 +12,24 @@ const Panel = (props) => {
   const displayValue = displayInOz ? toDecimal(gToOz(value)) : value;
   const unitText = displayInOz ? 'ounces' : 'grams';
 
-  function handleUpdate(ev) {
-    let inputVal = parseInt(ev.target.value, 10);
+  function handleUpdate(e) {
+    let inputVal = parseInt(e.target.value, 10);
     if (isNaN(inputVal)) inputVal = 0;
     op(UPDATE, inputVal);
   }
 
-  function handleSubmit(ev) {
-    if (ev.which === 13) op(TOGGLE_EDIT);
+  function handleSubmit(e) {
+    if (e.which === 13) op(TOGGLE_EDIT);
   }
 
-  function toggleEdit() {
-    op(TOGGLE_EDIT);
+  function handleFocus(e) {
+    e.target.select();
   }
 
-  function toggleUnit() {
-    op(TOGGLE_UNIT);
-  }
-
-  function inc() {
-    op(INC);
-  }
-
-  function dec() {
-    op(DEC);
-  }
+  const toggleEdit = () => op(TOGGLE_EDIT);
+  const toggleUnit = () => op(TOGGLE_UNIT);
+  const inc = () => op(INC);
+  const dec = () => op(DEC);
 
   const valInput = (
     <input
@@ -47,6 +40,7 @@ const Panel = (props) => {
       onChange={handleUpdate}
       onKeyDown={handleSubmit}
       onBlur={toggleEdit}
+      onFocus={handleFocus}
       autoFocus
     >
     </input>
